@@ -24,7 +24,39 @@ module.exports = function (app) {
       var returnUnit = convertHandler.getReturnUnit(initUnit);
       var toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
       
-      //res.json
+      let result;
+
+      if(initUnit === null && initNum ===null) {
+        result = {
+          error:'Invalid number and unit'
+        }
+      }
+     else if(initUnit === null){
+       result ={
+         error:'invalid unit'
+       }
+     }
+
+     else if(initNum === null) {
+       result = {
+         error:'invalid number'
+       }
+     } else{
+
+      result = {
+        initNum,
+        initUnit,
+        returnNum,
+        returnUnit,
+        toString
+      };
+
+     }
+
+      
+    // res.json(result);
+
+      res.json({initNum:initNum,initUnit:initUnit,returnNum:returnNum,returnUnit:returnUnit,string:toString})
     });
     
 };
